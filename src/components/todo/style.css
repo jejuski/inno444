@@ -1,0 +1,41 @@
+.not{
+  background-color: #3c90ef;
+  border: none;
+  border-radius: 30px;
+  height: 40px;
+  width: 100px;
+  font-weight: 600;
+  color: white;
+
+  font-size: 27px;
+}
+.done {
+  background-color: #2edd9a;
+  border: none;
+  border-radius: 30px;
+  height: 40px;
+  width: 100px;
+  font-weight: 600;
+  color: white;
+  font-family: 'Gugi', cursive;
+  font-size: 27px;
+}
+
+.done:hover {
+  background-color: #e2a0ab;
+}
+.notyet:hover {
+  background-color: #95a5d4;
+}
+.card-body {
+  margin-top: -10px;
+  
+}
+
+.card-all {
+  border-width: 6px;
+  border-style: solid;
+  border-color: rgb(113, 197, 239);
+  border-radius: 30px;
+  background-color: rgb(230, 243, 250);
+}
