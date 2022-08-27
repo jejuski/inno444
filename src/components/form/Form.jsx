@@ -1,49 +1,60 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, {useState} from "react";
 import "./style.css";
-import { useDispatch } from "react-redux";
-import { createTodo } from "../../redux/modules/todo";
+import { useNavigate } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
 
-let num = 1;
+
 function Form() {
-  const initialState = {
-    id: 0,
+  
+  const [inputs, setInputs] = useState({
+    nick: "",
     title: "",
     body: "",
-    isDone: false,
+  });
+
+ 
+  /*create users*/
+  const createUsers = () => {
+    return axios.post("http://localhost:3002/todo", {
+      title: inputs.title,
+      nick: inputs.nick,
+      body: inputs.body,
+      
+    }
+    );
+  };
+  const handleOnSubmit = (e) => {
+    setInputs({
+      ...inputs,
+      [e.target.name]: e.target.value,
+    });
   };
 
-  const [todo, setTodo] = useState(initialState);
-  const dispatch = useDispatch();
-
-  const onChangeHandler = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setTodo({ ...todo, [name]: value });
-  };
-
-  const onSubmitHandler = (e) => {
-    e.preventDefault();
-    if (!todo.title || !todo.body) return;
-    dispatch(createTodo({ ...todo, id: num + 1 }));
-    setTodo(initialState);
-    num++;
-  };
-
+  let navigate = useNavigate();
+    function handleClick() {
+        navigate("/Detail");
+    }
   return (
-    <form className="inputForm" onSubmit={onSubmitHandler}>
-      <div className="row gx-5 gy-3 mb-1">
-        <div className="col">
-          <label className="form-label">제목</label>
-          <input className="form-control form-control-lg" onChange={onChangeHandler} type="text" name="title" value={todo.title} />
-        </div>
-        <div className="col">
-          <label className="form-label">내용</label>
-          <input className="form-control form-control-lg" onChange={onChangeHandler} type="text" name="body" value={todo.body} />
-        </div>
-      </div>
-
-      <button className="inputButton mb-2">올리기</button>
-    </form>
+    <>
+      <div
+        onChange={handleOnSubmit}
+        className="ml-4 flex flex-col w-2/12 form_container"
+      >
+        <label className="form-label">닉네임</label>
+        <input className="form-control form-control-lg" type="text" name="nick" />
+        <label className="form-label">아이디</label>
+        <input className="form-control form-control-lg" type="text" name="title" />
+        <label className="form-label">내용</label>
+        <input className="form-control form-control-lg" type="text" name="body" />     
+        <button className="inputButton mb-2" onClick={ () => {
+          createUsers()
+          handleClick()
+        } }>
+          저장
+        </button>
+              </div>
+    </>
   );
 }
 export default Form;

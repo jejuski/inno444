@@ -20,6 +20,7 @@
   font-weight: 700;
   padding-left: 10px;
   font-family: 'Gugi', cursive;
+  align-items: center;
    
 }
 .form-control-lg {
@@ -46,6 +47,10 @@
 
 .inputButton:hover {
   background-color: rgba(184, 230, 239, 0.87);
+}
+
+.card_input{
+  align-items: center;
 }
 
 
